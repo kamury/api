@@ -1,80 +1,395 @@
 FORMAT: 1A
 HOST: http://polls.apiblueprint.org/
 
-# Monocle
+# monocle
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+API для получения радиолокационных данных. Все комментарии на русском, в соответствии со спецификацией. В именах сущностей часть названий, для которых удалось подобрать соотвествующий англоязычный аналог, передена на английский, часть оставлена в виде аббревиатур, соответсвующих русскоязычным аббревиатурам.
 
-## Questions Collection [/questions]
+## Станции [/radar/list{?ids}{?name}{?limit}{?offset}]
 
-### List All Questions [GET]
+### Получить список станций [GET]
+
++ Parameters
+    * ids - Фильтр по id
+    + name - Фильтр по названию
+    + limit - Количество строк на странице
+    + offset - Начиная с какой позиции выводить элементы
 
 + Response 200 (application/json)
 
-        [
+        {
+            "count": 5,
+            "rows": [
+                {
+                    "id": 1,
+                    "index": "0001",
+                    "title": "Орловка",
+                    "latitude": {
+                        "type": "S",
+                        "value": "43° 13' 46''"
+                    },
+                    "longitude": {
+                        "type": "W",
+                        "value": "12° 43' 17''"
+                    },
+                    "MASL": 0,
+                    "HAAT_radar": 0,
+                    "HAAT_AMS_DAD": 0,
+                    "terrain_type": "land",
+                    "current_program": {
+                        "id": 1,
+                        "title": "Обзор 50 км УМ 0-90°"
+                    },
+                    "schedule_status": "started",
+                    "alarm_id": 0
+                },
+                {
+                    "id": 2,
+                    "index": "0002",
+                    "title": "Чкаловский",
+                    "latitude": {
+                        "type": "S",
+                        "value": "43° 13' 46''"
+                    },
+                    "longitude": {
+                        "type": "W",
+                        "value": "12° 43' 17''"
+                    },
+                    "MASL": 0,
+                    "HAAT_radar": 0,
+                    "HAAT_AMS_DAD": 0,
+                    "terrain_type": "coldsea",
+                    "current_program": {
+                        "id": 1,
+                        "title": "Обзор 50 км УМ 0-90°"
+                    },
+                    "schedule_status": "started",
+                    "alarm_id": 0
+                },
+                {
+                    "id": 3,
+                    "index": "0003",
+                    "title": "Елец",
+                    "latitude": {
+                        "type": "S",
+                        "value": "43° 13' 46''"
+                    },
+                    "longitude": {
+                        "type": "W",
+                        "value": "12° 43' 17''"
+                    },
+                    "MASL": 0,
+                    "HAAT_radar": 0,
+                    "HAAT_AMS_DAD": 0,
+                    "terrain_type": "warmsea",
+                    "current_program": {
+                        "id": 1,
+                        "title": "Готовность"
+                    },
+                    "schedule_status": "stopped",
+                    "alarm_id": 0
+                }
+            ]
+        }
+
+## Станция [/radar/{id}]
+
++ Parameters
+    + id (number) - ID станции
+
+### Получить станцию [GET]
+
++ Response 200 (application/json)
+
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
+                "id": 3,
+                "index": "0003",
+                "title": "Елец",
+                "latitude": {
+                    "type": "S",
+                    "value": "43° 13' 46''"
+                },
+                "longitude": {
+                    "type": "W",
+                    "value": "12° 43' 17''"
+                },
+                "MASL": 0,
+                "HAAT_radar": 0,
+                "HAAT_AMS_DAD": 0,
+                "terrain_type": "",
+                "current_program": {
+                    "id": 1,
+                    "title": "Готовность"
+                },
+                "schedule_status": "stopped",
+                "alarm_id": 0
             }
-        ]
+            
++ Response 404
 
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+### Обновить станцию [PUT]
 
 + Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+            "index": "0003",
+            "title": "Елец",
+            "latitude": {
+                "type": "S",
+                "value": "43° 13' 46''"
+            },
+            "longitude": {
+                "type": "W",
+                "value": "12° 43' 17''"
+            },
+            "MASL": 0,
+            "HAAT_radar": 0,
+            "HAAT_AMS_DAD": 0,
+            "terrain_type": "land",
+            "alarm_id": 0
         }
 
-+ Response 201 (application/json)
-
-    + Headers
-
-            Location: /questions/2
++ Response 422 (application/json)
 
     + Body
 
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
+                "index": "Невалидное значение",
+                "index_not_unique": "Индекс не уникален",
+                "title": "Невалидное значение",
+                "terrainType": "Невалидное значение",
+                "latitude": "Невалидное значение",
+                "longitude": "Невалидное значение",
+                "MASL": "Невалидное значение",
+                "HAATRadar": "Невалидное значение",
+                "HAATAMSDAD": "Невалидное значение",
+                "alarmId": "Невалидное значение"
+            }
+
+## Программы [/program/list{?mode}{?name}{?limit}{?offset}]
+
+### Список программ [GET]
+
++ Parameters
+    + mode - Фильтр режима
+    + name - Фильтр по названию
+    + limit - Количество строк на странице
+    + offset - Начиная с какой позиции выводить элементы
+
++ Response 200 (application/json)
+
+        {
+            "count": 4,
+            "rows": [
+                {
+                    "id": 1,
+                    "title": "Обзор 50 км УМ 0-90°",
+                    "duration": "PT0H10M0S",
+                    "mode": "circular",
+                    "distance": 25,
+                    "elevation_change_azimuth": 0,
+                    "left_border_azimuth": 0,
+                    "right_border_azimuth": 0,
+                    "elevation_program": [{
+                      "value": 1
+                    }],
+                    "blocking_program": [
+                      {
+                        "start": 0,
+                        "end": 0
+                      }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "title": "Сектор 50 км 60-30°",
+                    "duration": "PT0H12M0S",
+                    "mode": "sector",
+                    "distance": 50,
+                    "elevation_change_azimuth": 0,
+                    "left_border_azimuth": 0,
+                    "right_border_azimuth": 0,
+                    "elevation_program": [{
+                      "value": 1
+                    }],
+                    "blocking_program": [
+                      {
+                        "start": 0,
+                        "end": 0
+                      }
+                    ]
+                },
+                {
+                    "id": 3,
+                    "title": "Обзор 100 км УМ 0-90°",
+                    "duration": "PT0H15M0S",
+                    "mode": "circular",
+                    "distance": 100,
+                    "elevation_change_azimuth": 0,
+                    "left_border_azimuth": 0,
+                    "right_border_azimuth": 0,
+                    "elevation_program": [{
+                      "value": 1
+                    }],
+                    "blocking_program": [
+                      {
+                        "start": 0,
+                        "end": 0
+                      }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "title": "Сектор 75 км 60-30°",
+                    "duration": "PT0H18M0S",
+                    "mode": "sector",
+                    "distance": 150,
+                    "elevation_change_azimuth": 0,
+                    "left_border_azimuth": 0,
+                    "right_border_azimuth": 0,
+                    "elevation_program": [{
+                      "value": 1
+                    }],
+                    "blocking_program": [
+                      {
+                        "start": 0,
+                        "end": 0
+                      }
+                    ]
+                }
+            ]
+        }
+
+## Программа [/program/{id}]
+
++ Parameters
+    + id (number) - ID программы
+
+### Получить программу [GET]
+
++ Response 200 (application/json)
+
+            {
+                "id": 1,
+                "title": "Обзор 50 км УМ 0-90°",
+                "duration": "PT0H10M0S",
+                "mode": "circular",
+                "distance": 25,
+                "elevation_change_azimuth": 0,
+                "left_border_azimuth": 0,
+                "right_border_azimuth": 0,
+                "elevation_program": [{
+                  "value": 1
+                }],
+                "blocking_program": [
+                  {
+                    "start": 0,
+                    "end": 0
+                  }
                 ]
             }
+
+### Создать программу [POST /program]
+
++ Request (application/json)
+
+        {
+            "title": "",
+            "duration": "",
+            "mode": "",
+            "distance": "",
+            "elevation_change_azimuth": "",
+            "left_border_azimuth": "",
+            "right_border_azimuth": "",
+            "elevation_program": [{
+                "value": 1
+            }],
+            "blocking_program": [{
+                "start": 1,
+                "end": 2
+            }]
+        }
+
++ Response 422 (application/json)
+
+    + Body
+
+            {
+                "title": "Невалидное значение",
+                "duration": "Невалидное значение",
+                "mode": "Невалидное значение",
+                "distance": "Невалидное значение",
+                "elevation_change_azimuth": "Невалидное значение",
+                "left_border_azimuth": "Невалидное значение",
+                "right_border_azimuth": "Невалидное значение",
+                "elevation_program": {
+                    "common": "Невалидное значение",
+                    "rows": [{
+                        "index": 0,
+                        "value": "Невалидное значение"
+                    }]
+                },
+                "blocking_program": {
+                    "common": "",
+                    "rows": [{
+                        "index": 0,
+                        "start": "Невалидное значение",
+                        "end": "Невалидное значение"
+                    }]
+                }
+            }
+
+### Обновить программу [PUT]
+
++ Request (application/json)
+
+        {
+            "id": 1,
+            "title": "Обзор 50 км УМ 0-90°",
+            "duration": "PT0H10M0S",
+            "mode": "circular",
+            "distance": 25,
+            "elevation_change_azimuth": 0,
+            "left_border_azimuth": 0,
+            "right_border_azimuth": 0,
+            "elevation_program": [{
+              "value": 1
+            }],
+            "blocking_program": [
+              {
+                "start": 0,
+                "end": 0
+              }
+            ]
+        }
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "id": 1,
+                "title": "Обзор 50 км УМ 0-90°",
+                "duration": "PT0H10M0S",
+                "mode": "circular",
+                "distance": 25,
+                "elevation_change_azimuth": 0,
+                "left_border_azimuth": 0,
+                "right_border_azimuth": 0,
+                "elevation_program": [{
+                  "value": 1
+                }],
+                "blocking_program": [
+                  {
+                    "start": 0,
+                    "end": 0
+                  }
+                ]
+            }
+            
+## Удалить программукфвы [DELETE /program{?ids}]
+
++ Parameters
+    + ids - Масив id для удаления
+
++ Response 204
