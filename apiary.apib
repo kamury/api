@@ -65,6 +65,10 @@ API для получения радиолокационных данных. В�
                     },
                     "schedule_status": "started",
                     "alarm_id": 0
+                    "local_reflection_map": {
+                        "created": 1
+                        "duration": "PT0H12M0S"
+                    }
                 },
                 {
                     "id": 3,
@@ -88,6 +92,10 @@ API для получения радиолокационных данных. В�
                     },
                     "schedule_status": "stopped",
                     "alarm_id": 0
+                    "local_reflection_map": {
+                        "created": 0
+                        "duration": null
+                    }
                 }
             ]
         }
@@ -123,6 +131,10 @@ API для получения радиолокационных данных. В�
                 },
                 "schedule_status": "stopped",
                 "alarm_id": 0
+                "local_reflection_map": {
+                    "created": 0
+                    "duration": null
+                }
             }
             
 + Response 404
@@ -147,6 +159,10 @@ API для получения радиолокационных данных. В�
             "HAAT_AMS_DAD": 0,
             "terrain_type": "land",
             "alarm_id": 0
+            "local_reflection_map": {
+                "created": 0
+                "duration": null
+            }
         }
 
 + Response 422 (application/json)
@@ -166,6 +182,40 @@ API для получения радиолокационных данных. В�
                 "alarmId": "Невалидное значение"
             }
 
+## Станция [/radar/{id}/settings]
+
+### Список настроек станции [GET]
+
++ Response 200 (application/json)
+
+            {
+                "idADD ": 3,
+                "index": "0003",
+                "title": "Елец",
+                "latitude": {
+                    "type": "S",
+                    "value": "43° 13' 46''"
+                },
+                "longitude": {
+                    "type": "W",
+                    "value": "12° 43' 17''"
+                },
+                "MASL": 0,
+                "HAAT_radar": 0,
+                "HAAT_AMS_DAD": 0,
+                "terrain_type": "",
+                "current_program": {
+                    "id": 1,
+                    "title": "Готовность"
+                },
+                "schedule_status": "stopped",
+                "alarm_id": 0
+                "local_reflection_map": {
+                    "created": 0
+                    "duration": null
+                }
+            }
+            
 ## Программы [/program/list{?mode}{?title}{?limit}{?offset}]
 
 ### Список программ [GET]
@@ -259,6 +309,13 @@ API для получения радиолокационных данных. В�
                 }
             ]
         }
+        
+### Удалить программы [DELETE /program{?ids}]
+
++ Parameters
+    + ids - Масив id для удаления
+
++ Response 204
 
 ## Программа [/program/{id}]
 
@@ -387,9 +444,7 @@ API для получения радиолокационных данных. В�
                 ]
             }
             
-## Удалить программы [DELETE /program{?ids}]
-
-+ Parameters
-    + ids - Масив id для удаления
+## Удалить программу [DELETE]
 
 + Response 204
++ Response 404
