@@ -65,10 +65,7 @@ API для получения радиолокационных данных. В�
                     },
                     "schedule_status": "started",
                     "alarm_id": 0,
-                    "local_reflection_map": {
-                        "created": 1,
-                        "duration": "PT0H12M0S"
-                    }
+                    "record_local_reflection_map_duration": "PT0H12M0S"
                 },
                 {
                     "id": 3,
@@ -92,10 +89,7 @@ API для получения радиолокационных данных. В�
                     },
                     "schedule_status": "stopped",
                     "alarm_id": 0,
-                    "local_reflection_map": {
-                        "created": 0,
-                        "duration": null
-                    }
+                    "record_local_reflection_map_duration": null
                 }
             ]
         }
@@ -131,10 +125,7 @@ API для получения радиолокационных данных. В�
                 },
                 "schedule_status": "stopped",
                 "alarm_id": 0,
-                "local_reflection_map": {
-                    "created": 0,
-                    "duration": null
-                }
+                "record_local_reflection_map_duration": null
             }
             
 + Response 404
@@ -160,10 +151,7 @@ API для получения радиолокационных данных. В�
             "HAAT_AMS_DAD": 0,
             "terrain_type": "land",
             "alarm_id": 0,
-            "local_reflection_map": {
-                "created": 0,
-                "duration": null
-            }
+            "record_local_reflection_map_duration": null
         }
 
 + Response 422 (application/json)
@@ -180,8 +168,7 @@ API для получения радиолокационных данных. В�
                 "MASL": "Невалидное значение",
                 "HAATRadar": "Невалидное значение",
                 "HAATAMSDAD": "Невалидное значение",
-                "alarmId": "Невалидное значение",
-                "local_reflection_map": "Невалидное значение"
+                "alarmId": "Невалидное значение"
             }
             
 + Response 200 (application/json)
@@ -205,10 +192,7 @@ API для получения радиолокационных данных. В�
                 "HAAT_AMS_DAD": 0,
                 "terrain_type": "land",
                 "alarm_id": 0,
-                "local_reflection_map": {
-                    "created": 0,
-                    "duration": null
-                }
+                "record_local_reflection_map_duration": null
             }
         
 + Response 404
