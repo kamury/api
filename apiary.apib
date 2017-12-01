@@ -44,7 +44,9 @@ API для получения радиолокационных данных. В�
                     "alarm_id": 0,
                     "record_local_reflection_map_duration": null,
                     "equipment_status": true,
-                    "exchange_status": true
+                    "exchange_status": true,
+                    "rotation_status": 60,
+                    "max_dangerous_meteo": 
                 },
                 {
                     "id": 2,
@@ -70,7 +72,8 @@ API для получения радиолокационных данных. В�
                     "alarm_id": 0,
                     "record_local_reflection_map_duration": "PT0H12M0S",
                     "equipment_status": true,
-                    "exchange_status": true
+                    "exchange_status": true,
+                    "rotation_status": 60
                 },
                 {
                     "id": 3,
@@ -96,7 +99,8 @@ API для получения радиолокационных данных. В�
                     "alarm_id": 0,
                     "record_local_reflection_map_duration": null,
                     "equipment_status": true,
-                    "exchange_status": true
+                    "exchange_status": true,
+                    "rotation_status": 60
                 },
                 {
                     "id": 4,
@@ -122,7 +126,8 @@ API для получения радиолокационных данных. В�
                     "alarm_id": 0,
                     "record_local_reflection_map_duration": null,
                     "equipment_status": true,
-                    "exchange_status": true
+                    "exchange_status": true,
+                    "rotation_status": 60
                 },
                 {
                     "id": 5,
@@ -148,7 +153,8 @@ API для получения радиолокационных данных. В�
                     "alarm_id": 0,
                     "record_local_reflection_map_duration": null,
                     "equipment_status": true,
-                    "exchange_status": true
+                    "exchange_status": true,
+                    "rotation_status": 60
                 }
             ]
         }
@@ -186,7 +192,8 @@ API для получения радиолокационных данных. В�
                 "alarm_id": 0,
                 "record_local_reflection_map_duration": null,
                 "equipment_status": true,
-                "exchange_status": true
+                "exchange_status": true,
+                "rotation_status": 60
             }
             
 + Response 404
@@ -254,7 +261,8 @@ API для получения радиолокационных данных. В�
                 "alarm_id": 0,
                 "record_local_reflection_map_duration": null,
                 "equipment_status": true,
-                "exchange_status": true
+                "exchange_status": true,
+                "rotation_status": 60
             }
         
 + Response 404
@@ -721,9 +729,19 @@ API для получения радиолокационных данных. В�
             
         }
             
-## РЛП [/radar/{id}/RLP{?rlp_ids}{?sampling}]
+## РЛП [/radar/{id}/RLP{?rlp_ids}{?view_type}{?only_dangerous}{?altitude}{?from}{?to}]
 
 ### Получить РЛП [GET]
+
++ Parameters
+    + id (number) - ID станции
+    * rlp_ids - Фильтр по id
+    * view_type - Карта метеоявлений в ячейках или в контурах
+    * only_dangerous - отображать только ОМЯ
+    * altitude - высота в метрах
+    * from - Начальный период поиска
+    * to - Конечный период поиска
+    
 
 + Response 200 (application/json)
 
