@@ -699,6 +699,27 @@ API для получения радиолокационных данных. В�
 + Response 409
 
 + Response 404
+
+## НАМС и метеостатистика [/radar/{id}/meteoinfo]
+
+### НАМС и метеостатистика [GET]
+
++ Response 200 (application/json)
+
+        {
+            "temperature": -3,
+            "humidity": 72,
+            "pressure": 780,
+            "cloud_transfer_azimuth": 319,
+            "cloud_transfer_speed": 3,
+            "cloud_base": 1000,
+            "cloud_top": 4000
+            "wind_azimuth": 319,
+            "wind_speed": 3,
+            "max_weathering": "Ливень умеренный",
+            
+            
+        }
             
 ## РЛП [/radar/{id}/RLP{?rlp_ids}{?sampling}]
 
