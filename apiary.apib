@@ -40,13 +40,12 @@ API для получения радиолокационных данных. В�
                         "id": 1,
                         "title": "Обзор 50 км УМ 0-90°"
                     },
-                    "schedule_status": "started",
+                    "schedule_started": true,
                     "alarm_id": 0,
                     "record_local_reflection_map_duration": null,
                     "equipment_status": true,
                     "exchange_status": true,
-                    "rotation_status": 60,
-                    "max_dangerous_meteo": ""
+                    "rotation_status": 60
                 },
                 {
                     "id": 2,
@@ -68,7 +67,7 @@ API для получения радиолокационных данных. В�
                         "id": 1,
                         "title": "Обзор 50 км УМ 0-90°"
                     },
-                    "schedule_status": "started",
+                    "schedule_started": true,
                     "alarm_id": 0,
                     "record_local_reflection_map_duration": "PT0H12M0S",
                     "equipment_status": true,
@@ -95,7 +94,7 @@ API для получения радиолокационных данных. В�
                         "id": 1,
                         "title": "Готовность"
                     },
-                    "schedule_status": "stopped",
+                    "schedule_started": false,
                     "alarm_id": 0,
                     "record_local_reflection_map_duration": null,
                     "equipment_status": true,
@@ -122,7 +121,7 @@ API для получения радиолокационных данных. В�
                         "id": 1,
                         "title": "Готовность"
                     },
-                    "schedule_status": "stopped",
+                    "schedule_started": false,
                     "alarm_id": 0,
                     "record_local_reflection_map_duration": null,
                     "equipment_status": true,
@@ -149,7 +148,7 @@ API для получения радиолокационных данных. В�
                         "id": 1,
                         "title": "Готовность"
                     },
-                    "schedule_status": "stopped",
+                    "schedule_started": false,
                     "alarm_id": 0,
                     "record_local_reflection_map_duration": null,
                     "equipment_status": true,
@@ -770,8 +769,37 @@ API для получения радиолокационных данных. В�
 + Response 200 (application/json)
 
             {
-                "record_local_reflection_map_duration": "PT0H12M0S"
-            }
+                    "id": 2,
+                    "title": "Сектор 50 км 60-30°",
+                    "duration": "PT0H12M0S",
+                    "mode": "sector",
+                    "distance": 50,
+                    "elevation_change_azimuth": 0,
+                    "left_border_azimuth": 0,
+                    "right_border_azimuth": 0,
+                    "elevation_program": [{
+                      "value": 1
+                    }],
+                    "blocking_program": [
+                      {
+                        "start": 0,
+                        "end": 0
+                      }
+                    ]
+                }
+
++ Response 409
+
++ Response 404
+
+## Остановить все запущенные программы [/radar/{id}/program/stop]
+
++ Parameters
+    + id (number) - ID станции
+
+### Остановить все запущенные программы [POST]
+
++ Response 200 (application/json)
 
 + Response 409
 
@@ -1773,176 +1801,41 @@ API для получения радиолокационных данных. В�
 ### Получить настройки для построения карт [GET]
 
 + Response 200 (application/json)
-        
+    
         {
-            "count": 7,
-            "rows":
-                [
-                    {
-                        "id": 1,
-                        "title": "Векторное поле скоростей",
-                        "params": [
-                            {
-                                "id": 1,
-                                "title": "Шаг по горизонтали",
-                                "meashure_unit": "м",
-                                "type": "Режим Обзор",
-                                "value": 100
-                            },
-                            {
-                                "id": 2,
-                                "title": "Шаг по вертикали",
-                                "meashure_unit": "м",
-                                "type": "Режим Обзор",
-                                "value": 100
-                            },
-                            {
-                                "id": 3,
-                                "title": "Шаг по горизонтали",
-                                "meashure_unit": "м",
-                                "type": "Режим Сектор (ширина < 70 градусов)",
-                                "value": 200
-                            },
-                            {
-                                "id": 4,
-                                "title": "Шаг по вертикали",
-                                "meashure_unit": "м",
-                                "type": "Режим Сектор (ширина < 70 градусов)",
-                                "value": 200
-                            }
-                        ]
-                    },
-                    {
-                        "id": 2,
-                        "title": "Поля сдвигов ветра",
-                        "params": [
-                            {
-                                "id": 1,
-                                "title": "Максимальная высота",
-                                "meashure_unit": "м",
-                                "type": "Режим Обзор",
-                                "value": 100
-                            },
-                            {
-                                "id": 2,
-                                "title": "Максимальная дальность",
-                                "meashure_unit": "м",
-                                "type": "Режим Обзор",
-                                "value": 100
-                            },
-                            {
-                                "id": 3,
-                                "title": "Максимальная высота",
-                                "meashure_unit": "м",
-                                "type": "Режим Сектор (ширина < 70 градусов)",
-                                "value": 200
-                            },
-                            {
-                                "id": 4,
-                                "title": "Максимальная дальность",
-                                "meashure_unit": "м",
-                                "type": "Режим Сектор (ширина < 70 градусов)",
-                                "value": 200
-                            },
-                            {
-                                "id": 5,
-                                "title": "Шаг по горизонтали",
-                                "meashure_unit": "м",
-                                "value": 200
-                            },
-                            {
-                                "id": 6,
-                                "title": "Шаг по вертикали",
-                                "meashure_unit": "м",
-                                "value": 200
-                            }
-                        ]
-                    },
-                    {
-                        "id": 3,
-                        "title": "Метеоявления",
-                        "params": [
-                            {
-                                "id": 1,
-                                "title": "Размер ячейки карты метеоявлений",
-                                "meashure_unit": "м",
-                                "value": 100
-                            },
-                            {
-                                "id": 2,
-                                "title": "Степень генерализации контуров",
-                                "meashure_unit": "ед",
-                                "value": 3
-                            },
-                            {
-                                "id": 3,
-                                "title": "Величина расширения контуров",
-                                "meashure_unit": "ячеек",
-                                "value": 3
-                            }
-                        ]
-                    },
-                    {
-                        "id": 4,
-                        "title": "Вектор",
-                        "params": [
-                            {
-                                "id": 1,
-                                "title": "Размер вектора",
-                                "meashure_unit": "ед",
-                                "value": 5
-                            },
-                            {
-                                "id": 2,
-                                "title": "Толщина вектора",
-                                "meashure_unit": "ед",
-                                "value": 3
-                            }
-                        ]
-                    },
-                    {
-                        "id": 5,
-                        "title": "Вертикальное сечение",
-                        "params": [
-                            {
-                                "id": 1,
-                                "title": "Шаг по горизонтали",
-                                "meashure_unit": "м",
-                                "value": 100
-                            },
-                            {
-                                "id": 2,
-                                "title": "Шаг по вертикали",
-                                "meashure_unit": "м",
-                                "value": 100
-                            }
-                        ]
-                    },
-                    {
-                        "id": 6,
-                        "title": "Накопленные осадки",
-                        "params": [
-                            {
-                                "id": 1,
-                                "title": "Размер ячейки карты накопленных осадков",
-                                "meashure_unit": "м",
-                                "value": 100
-                            }
-                        ]
-                    },
-                    {
-                        "id": 7,
-                        "title": "Вертикально интегрированная водность",
-                        "params": [
-                            {
-                                "id": 1,
-                                "title": "Размер ячейки карты вертикально интегрированной водности",
-                                "meashure_unit": "м",
-                                "value": 100
-                            }
-                        ]
-                    }
-                ]
+            "vector_velocity_field": {
+                "circular_horizontal_pitch": 100,
+                "circular_vertical_pitch": 100,
+                "sector_horizontal_pitch": 100,
+                "sector_vertical_pitch": 100
+            },
+            "wind_shear_field": {
+                "circular_max_height": 100,
+                "circular_max_distance": 100,
+                "sector_max_height": 100,
+                "sector_max_distance": 100,
+                "horizontal_pitch": 100,
+                "vertical_pitch": 100
+            },
+            "atmospheric_process": {
+                "cell_size": 150,
+                "line_generalization": 3,
+                "line_expansion": 3,
+            },
+            "vector": {
+                "size": 5,
+                "thickness": 3
+            },
+            "vertical_section": {
+                "horizontal_pitch": 100,
+                "vertical_pitch": 100
+            },
+            "accumulated_precipitation": {
+                "cell_size": 100
+            },
+            "vertically_integrated_liquid": {
+                "cell_size": 100
+            }
         }
                     
  
@@ -1950,330 +1843,97 @@ API для получения радиолокационных данных. В�
 
 + Request (application/json)
     
-        [
-            {
-                "id": 1,
-                "params": [
-                    {
-                        "id": 1,
-                        "value": 100
-                    },
-                    {
-                        "id": 2,
-                        "value": 100
-                    },
-                    {
-                        "id": 3,
-                        "value": 200
-                    },
-                    {
-                        "id": 4,
-                        "value": 200
-                    }
-                ]
+        {
+            "vector_velocity_field": {
+                "circular_horizontal_pitch": 100,
+                "circular_vertical_pitch": 100,
+                "sector_horizontal_pitch": 100,
+                "sector_vertical_pitch": 100
             },
-            {
-                "id": 2,
-                "params": [
-                    {
-                        "id": 1,
-                        "value": 100
-                    },
-                    {
-                        "id": 2,
-                        "value": 100
-                    },
-                    {
-                        "id": 3,
-                        "value": 200
-                    },
-                    {
-                        "id": 4,
-                        "value": 200
-                    },
-                    {
-                        "id": 5,
-                        "value": 200
-                    },
-                    {
-                        "id": 6,
-                        "value": 200
-                    }
-                ]
+            "wind_shear_field": {
+                "circular_max_height": 100,
+                "circular_max_distance": 100,
+                "sector_max_height": 100,
+                "sector_max_distance": 100,
+                "horizontal_pitch": 100,
+                "vertical_pitch": 100
             },
-            {
-                "id": 3,
-                "params": [
-                    {
-                        "id": 1,
-                        "value": 100
-                    },
-                    {
-                        "id": 2,
-                        "value": 3
-                    },
-                    {
-                        "id": 3,
-                        "value": 3
-                    }
-                ]
+            "atmospheric_process": {
+                "cell_size": 150,
+                "line_generalization": 3,
+                "line_expansion": 3,
             },
-            {
-                "id": 4,
-                "params": [
-                    {
-                        "id": 1,
-                        "value": 5
-                    },
-                    {
-                        "id": 2,
-                        "value": 3
-                    }
-                ]
+            "vector": {
+                "size": 5,
+                "thickness": 3
             },
-            {
-                "id": 5,
-                "params": [
-                    {
-                        "id": 1,
-                        "value": 100
-                    },
-                    {
-                        "id": 2,
-                        "value": 100
-                    }
-                ]
+            "vertical_section": {
+                "horizontal_pitch": 100,
+                "vertical_pitch": 100
             },
-            {
-                "id": 6,
-                "params": [
-                    {
-                        "id": 1,
-                        "value": 100
-                    }
-                ]
+            "accumulated_precipitation": {
+                "cell_size": 100
             },
-            {
-                "id": 7,
-                "params": [
-                    {
-                        "id": 1,
-                        "value": 100
-                    }
-                ]
+            "vertically_integrated_liquid": {
+                "cell_size": 100
             }
-        ]
+        }
         
 + Response 200 (application/json)
         
         {
-            "count": 7,
-            "rows":
-                [
-                    {
-                        "id": 1,
-                        "title": "Векторное поле скоростей",
-                        "params": [
-                            {
-                                "id": 1,
-                                "title": "Шаг по горизонтали",
-                                "meashure_unit": "м",
-                                "type": "Режим Обзор",
-                                "value": 100
-                            },
-                            {
-                                "id": 2,
-                                "title": "Шаг по вертикали",
-                                "meashure_unit": "м",
-                                "type": "Режим Обзор",
-                                "value": 100
-                            },
-                            {
-                                "id": 3,
-                                "title": "Шаг по горизонтали",
-                                "meashure_unit": "м",
-                                "type": "Режим Сектор (ширина < 70 градусов)",
-                                "value": 200
-                            },
-                            {
-                                "id": 4,
-                                "title": "Шаг по вертикали",
-                                "meashure_unit": "м",
-                                "type": "Режим Сектор (ширина < 70 градусов)",
-                                "value": 200
-                            }
-                        ]
-                    },
-                    {
-                        "id": 2,
-                        "title": "Поля сдвигов ветра",
-                        "params": [
-                            {
-                                "id": 1,
-                                "title": "Максимальная высота",
-                                "meashure_unit": "м",
-                                "type": "Режим Обзор",
-                                "value": 100
-                            },
-                            {
-                                "id": 2,
-                                "title": "Максимальная дальность",
-                                "meashure_unit": "м",
-                                "type": "Режим Обзор",
-                                "value": 100
-                            },
-                            {
-                                "id": 3,
-                                "title": "Максимальная высота",
-                                "meashure_unit": "м",
-                                "type": "Режим Сектор (ширина < 70 градусов)",
-                                "value": 200
-                            },
-                            {
-                                "id": 4,
-                                "title": "Максимальная дальность",
-                                "meashure_unit": "м",
-                                "type": "Режим Сектор (ширина < 70 градусов)",
-                                "value": 200
-                            },
-                            {
-                                "id": 5,
-                                "title": "Шаг по горизонтали",
-                                "meashure_unit": "м",
-                                "value": 200
-                            },
-                            {
-                                "id": 6,
-                                "title": "Шаг по вертикали",
-                                "meashure_unit": "м",
-                                "value": 200
-                            }
-                        ]
-                    },
-                    {
-                        "id": 3,
-                        "title": "Метеоявления",
-                        "params": [
-                            {
-                                "id": 1,
-                                "title": "Размер ячейки карты метеоявлений",
-                                "meashure_unit": "м",
-                                "value": 100
-                            },
-                            {
-                                "id": 2,
-                                "title": "Степень генерализации контуров",
-                                "meashure_unit": "ед",
-                                "value": 3
-                            },
-                            {
-                                "id": 3,
-                                "title": "Величина расширения контуров",
-                                "meashure_unit": "ячеек",
-                                "value": 3
-                            }
-                        ]
-                    },
-                    {
-                        "id": 4,
-                        "title": "Вектор",
-                        "params": [
-                            {
-                                "id": 1,
-                                "title": "Размер вектора",
-                                "meashure_unit": "ед",
-                                "value": 5
-                            },
-                            {
-                                "id": 2,
-                                "title": "Толщина вектора",
-                                "meashure_unit": "ед",
-                                "value": 3
-                            }
-                        ]
-                    },
-                    {
-                        "id": 5,
-                        "title": "Вертикальное сечение",
-                        "params": [
-                            {
-                                "id": 1,
-                                "title": "Шаг по горизонтали",
-                                "meashure_unit": "м",
-                                "value": 100
-                            },
-                            {
-                                "id": 2,
-                                "title": "Шаг по вертикали",
-                                "meashure_unit": "м",
-                                "value": 100
-                            }
-                        ]
-                    },
-                    {
-                        "id": 6,
-                        "title": "Накопленные осадки",
-                        "params": [
-                            {
-                                "id": 1,
-                                "title": "Размер ячейки карты накопленных осадков",
-                                "meashure_unit": "м",
-                                "value": 100
-                            }
-                        ]
-                    },
-                    {
-                        "id": 7,
-                        "title": "Вертикально интегрированная водность",
-                        "params": [
-                            {
-                                "id": 1,
-                                "title": "Размер ячейки карты вертикально интегрированной водности",
-                                "meashure_unit": "м",
-                                "value": 100
-                            }
-                        ]
-                    }
-                ]
+            "vector_velocity_field": {
+                "circular_horizontal_pitch": 100,
+                "circular_vertical_pitch": 100,
+                "sector_horizontal_pitch": 100,
+                "sector_vertical_pitch": 100
+            },
+            "wind_shear_field": {
+                "circular_max_height": 100,
+                "circular_max_distance": 100,
+                "sector_max_height": 100,
+                "sector_max_distance": 100,
+                "horizontal_pitch": 100,
+                "vertical_pitch": 100
+            },
+            "atmospheric_process": {
+                "cell_size": 150,
+                "line_generalization": 3,
+                "line_expansion": 3,
+            },
+            "vector": {
+                "size": 5,
+                "thickness": 3
+            },
+            "vertical_section": {
+                "horizontal_pitch": 100,
+                "vertical_pitch": 100
+            },
+            "accumulated_precipitation": {
+                "cell_size": 100
+            },
+            "vertically_integrated_liquid": {
+                "cell_size": 100
+            }
         }
 
     
 + Response 422 (application/json)
 
-    + Body
-    
-            {
-                "count": 5,
-                "rows": 
-                    [
-                        {
-                            "id": 1,
-                            "params": [
-                                {
-                                    "id": 1,
-                                    "value": "Невалидное значение"
-                                },
-                                {
-                                    "id": 2,
-                                    "value": "Невалидное значение"
-                                },
-                                {
-                                    "id": 3,
-                                    "value": "Невалидное значение"
-                                }
-                            ]
-                        },
-                        {
-                            "id": 6,
-                            "params": [
-                                {
-                                    "id": 1,
-                                    "value": "Невалидное значение"
-                                }
-                            ]
-                        }
-                    ]
+        {
+            "vector_velocity_field": {
+                "circular_horizontal_pitch": "Невалидное значение",,
+                "circular_vertical_pitch": "Невалидное значение",,
+                "sector_horizontal_pitch": "Невалидное значение",,
+                "sector_vertical_pitch": "Невалидное значение",
+            },
+            "wind_shear_field": {
+                "sector_max_distance": "Невалидное значение"
+            },
+            "vertically_integrated_liquid": {
+                "cell_size": "Невалидное значение"
             }
+        }
 
 ## Список настроек цветовой шкалы [/settings/color_scale/list]
 
