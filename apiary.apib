@@ -805,6 +805,45 @@ API для получения радиолокационных данных. В�
 
 + Response 404
 
+## Запустить расписание [/radar/{id}/schedule/start]
+
++ Parameters
+    + id (number) - ID станции
+
+### Запустить программу [POST]
+
++ Response 200 (application/json)
+
++ Response 409
+
++ Response 404
+
+## Остановить расписание [/radar/{id}/schedule/stop]
+
++ Parameters
+    + id (number) - ID станции
+
+### Остановить расписание [POST]
+
++ Response 200 (application/json)
+
++ Response 409
+
++ Response 404
+
+## Проверка работоспособности локатора [/radar/{id}/checking]
+
++ Parameters
+    + id (number) - ID станции
+
+### Проверка работоспособности локатора [POST]
+
++ Response 200 (application/json)
+
++ Response 409
+
++ Response 404
+
 ## НАМС и метеостатистика [/radar/{id}/meteoinfo]
 
 + Parameters
