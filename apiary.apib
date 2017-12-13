@@ -266,6 +266,45 @@ API для получения радиолокационных данных. В�
         
 + Response 404
 
+## Программа станции [/radar/{id}/current_program]
+
++ Parameters
+    + id (number) - ID станции
+
+## Получить текущую программу станции [GET]
+
++ Response 200 (application/json)
+
+        {
+            "id": 3,
+            "index": "0003",
+            "title": "Елец",
+            "latitude": {
+                "type": "S",
+                "value": "43° 13' 46''"
+            },
+            "longitude": {
+                "type": "W",
+                "value": "12° 43' 17''"
+            },
+            "MASL": 0,
+            "HAAT_radar": 0,
+            "HAAT_AMS_DAD": 0,
+            "terrain_type": "",
+            "current_program": {
+                "id": 1,
+                "title": "Готовность"
+            },
+            "schedule_status": "started",
+            "alarm_id": 0,
+            "record_local_reflection_map_duration": null,
+            "equipment_status": true,
+            "exchange_status": true,
+            "rotation_status": 60
+        }
+    
++ Response 404
+
 ## Список каналов станции [/radar/{id}/settings/channel_list]
 
 + Parameters
@@ -355,28 +394,32 @@ API для получения радиолокационных данных. В�
         }
 
 
-## Список минимальных опасных метеоявлений станции [/radar/{id}/settings/min_dangerous_meteo_list]
+## Минимально опасное метеоявление станции [/radar/{id}/settings/min_dangerous_meteo]
 
 + Parameters
     + id (number) - ID станции
 
-### Список минимальных опасных метеоявлений станции [GET]
+### Получить [GET]
 
 + Response 200 (application/json)
 
         {
-            "count": 2,
-            "items": 
-                [
-                    {
-                        "id": 1,
-                        "title": "Облачность верхнего и среднего ярусов"
-                    },
-                    {
-                        "id": 2,
-                        "title": "Слоистая облачность"
-                    }
-                ]
+            "id": 2,
+            "title": "Слоистая облачность"
+        }
+        
+### Установить [PUT]
+
++ Request (application/json)
+
+        {
+            "id": 3
+        }
+        
++ Response 200 (application/json)
+
+        {
+            "id": "Невалидное значение"
         }
                 
 ## Список метеоявлений станции [/radar/{id}/settings/meteo_list]
@@ -2125,3 +2168,37 @@ API для получения радиолокационных данных. В�
                     }
                 ]
         }
+        
+## Факт работы по расписанию [/sched_fact/{id}]
+
++ Parameters
+    + id (number) - ID радара
+    
+### Получить [GET]
+
++ Response 200 (application/json)
+
+        {
+            "sched_fact": true
+        }
+        
+## Список архивных обзоров [/archive_product_list/{id}{?begin_timestamp}{?end_timestamp}]
+
+Общий для РЛП и КС
+
++ Parameters
+    + id (number) - ID радара
+    * begin_timestamp
+    * end_timestamp
+    
+### Получить [GET]
+
++ Response 200 (application/json)
+
+        [
+            {"timestamp": 1513157812},
+            {"timestamp": 1513157813},
+            {"timestamp": 1513157814},
+            {"timestamp": 1513157815},
+            {"timestamp": 1513157816}
+        ]
