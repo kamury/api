@@ -784,12 +784,18 @@ API для получения радиолокационных данных. В�
 
 + Response 404
 
-## Карта местных отражений [/radar/{id}/local_reflection_map]
+## Работа с картами местных отражений [/radar/{id}/local_reflection_map/{action}/{cycle}/{program_id}]
+
+0 - остановка
+1 - запуск
 
 + Parameters
     + id (number) - ID станции
+    + action (number) - действие
+    + cycle (number) - кол-во циклов
+    + program_id (number) - ID программы
 
-### Карта местных отражений [POST]
+### Установить действие для карт [POST]
 
 + Response 200 (application/json)
 
@@ -801,35 +807,39 @@ API для получения радиолокационных данных. В�
 
 + Response 404
 
-## Запустить программу [/radar/{id}/program/{program_id}]
+## Работа с программами [/radar/{id}/program/{program_id}/{action}]
+
+0 - остановка
+1 - запуск
 
 + Parameters
     + id (number) - ID станции
     + program_id (number) - ID программы
+    + action - действие
 
-### Запустить программу [POST]
+### Установить действие для программы [POST]
 
 + Response 200 (application/json)
 
             {
-                    "id": 2,
-                    "title": "Сектор 50 км 60-30°",
-                    "duration": "PT0H12M0S",
-                    "mode": "sector",
-                    "distance": 50,
-                    "elevation_change_azimuth": 0,
-                    "left_border_azimuth": 0,
-                    "right_border_azimuth": 0,
-                    "elevation_program": [{
-                      "value": 1
-                    }],
-                    "blocking_program": [
-                      {
-                        "start": 0,
-                        "end": 0
-                      }
-                    ]
-                }
+                "id": 2,
+                "title": "Сектор 50 км 60-30°",
+                "duration": "PT0H12M0S",
+                "mode": "sector",
+                "distance": 50,
+                "elevation_change_azimuth": 0,
+                "left_border_azimuth": 0,
+                "right_border_azimuth": 0,
+                "elevation_program": [{
+                  "value": 1
+                }],
+                "blocking_program": [
+                  {
+                    "start": 0,
+                    "end": 0
+                  }
+                ]
+            }
 
 + Response 409
 
@@ -848,12 +858,17 @@ API для получения радиолокационных данных. В�
 
 + Response 404
 
-## Запустить расписание [/radar/{id}/schedule/start]
+## Работа с расписаниями [/radar/{id}/schedule/{sched_id}/{action}]
+
+0 - остановка
+1 - запуск
 
 + Parameters
     + id (number) - ID станции
+    + sched_id (number) - ID расписания
+    + action - действие
 
-### Запустить программу [POST]
+### Установить действие для расписания [POST]
 
 + Response 200 (application/json)
 
@@ -887,7 +902,24 @@ API для получения радиолокационных данных. В�
 
 + Response 404
 
-## НАМС и метеостатистика [/radar/{id}/meteoinfo]
+## Данные НАМС [/radar/{id}/nams_data]
+
++ Parameters
+    + id (number) - ID станции
+
+### Получить [GET]
+
++ Response 200 (application/json)
+
+        {
+            "humidity": 72,
+            "pressure": 780,
+            "wind_azimuth": 319,
+            "wind_speed": 3,
+            "temp": 13
+        }
+
+## Данные метеостатистики [/radar/{id}/meteo_stat]
 
 + Parameters
     + id (number) - ID станции
@@ -897,20 +929,14 @@ API для получения радиолокационных данных. В�
 + Response 200 (application/json)
 
         {
-            "temperature": -3,
-            "humidity": 72,
-            "pressure": 780,
-            "cloud_transfer_azimuth": 319,
-            "cloud_transfer_speed": 3,
-            "cloud_base": 1000,
-            "cloud_top": 4000
-            "wind_azimuth": 319,
-            "wind_speed": 3,
+            "altitude_max_mo": 319,
+            "altitude_min_refl": 3,
+            "cs_speed": 1000,
+            "cs_dir": 4000
             "max_atmospheric_process": "Ливень умеренный",
-            
-            
+            "timestamp": 1513157816
         }
-            
+
 ## РЛП [/radar/{id}/RLP{?rlp_ids}{?view_type}{?only_dangerous}{?altitude}{?from}{?to}]
 
 ### Получить РЛП [GET]
@@ -2293,6 +2319,206 @@ API для получения радиолокационных данных. В�
                 "service_life": "Невалидное значение"
             }
         ]
+
+## Входные данные для алгоритма расчёта «нулевого» азимута [/azimuth_calc_data{?id}]
+
++ Parameters
+    + id (number) - ID радара
+
+### Установить [POST]
+
++ Request (application/json)
+
+        {
+            "distance_north": 200.0,
+            "distance_north_install": 100.0,
+            "distance_install": 300.3
+        }
+
++ Response 200
+
++ Response 422 (application/json)
+
+        {
+            "distance_north": "Невалидное значение",
+            "distance_north_install": "Невалидное значение",
+            "distance_install": "Невалидное значение"
+        }
+
+## Вличина поправки на север [/north_correction{?id}]
+
++ Parameters
+    + id (number) - ID радара
+
+### Получить [GET]
+
++ Response 200 (application/json)
+
+        {
+            "north_correction": 99.1222
+        }
+
+### Установить [POST]
+
++ Request (application/json)
+
+        {
+            "north_correction": 99.1222
+        }
+
++ Response 200
+
++ Response 422 (application/json)
+
+        {
+            "north_correction": "Невалидное значение"
+        }
+
+## Фиксированное положение антенны [/fix_antenna_settings{?id}]
+
+Получение от АРМ значения фиксированного положения антенны (азимут и угол места)
+
++ Parameters
+    + id (number) - ID радара
+
+### Установить [POST]
+
++ Request (application/json)
+
+        {
+            "azimuth": 10.1,
+            "tilt": 13.33
+        }
+
++ Response 200
+
++ Response 422 (application/json)
+
+        {
+            "azimuth": "Невалидное значение",
+            "tilt": "Невалидное значение"
+        }
+
+## Значение высоты нулевой изотермы  [/zero_isotherm{?id}]
+
+Получение от АРМ значение высоты нулевой изотермы 
+
++ Parameters
+    + id (number) - ID радара
+
+### Установить [POST]
+
++ Request (application/json)
+
+        {
+            "zero_isotherm": 10.2
+        }
+
++ Response 200
+
++ Response 422 (application/json)
+
+        {
+            "zero_isotherm": "Невалидное значение"
+        }
+
+## Номер канала [/channel_number{?id}]
+
++ Parameters
+    + id (number) - ID радара
+
+### Установить [POST]
+
++ Request (application/json)
+
+        {
+            "channel_number": 2
+        }
+
++ Response 200
+
++ Response 422 (application/json)
+
+        {
+            "channel_number": "Невалидное значение"
+        }
+
+## Режим определения высоты нулевой изотермы [/isotherm_calc_mode{?id}]
+
+Значение признака режима определения высоты нулевой изотермы 
+0 - автоматический
+1 - ручной
+
++ Parameters
+    + id (number) - ID радара
+
+### Получить [GET]
+
++ Response 200 (application/json)
+
+        {
+            "mode": 0
+        }
+
+### Установить [POST]
+
++ Request (application/json)
+
+        {
+            "mode": 1
+        }
+
++ Response 200
+
++ Response 422 (application/json)
+
+        {
+            "mode": "Невалидное значение"
+        }
+
+## Вертикальное сечение [/vertical_section_by_route]
+Предоставление вертикального сечения по маршруту для выбранного метеопродукта на заданном диапазоне  высот.
+
+### Получить [POST]
+
++ Request  (application/json)
+
+        {
+            "radar_id": 1,
+            "timestamp": 1513157817,
+            "begin_route_point": {
+                "lat": 55.807775,
+                "lon": 37.566814
+            },
+            "end_route_point": {
+                "lat": 55.807775,
+                "lon": 37.566814
+            },
+            "max_altitude": 5000.2,
+            "rlp_type": 2
+        }
+
++ Response 200
+
+## Вертикальный профиль [/vertical_profile]
+Предоставление вертикального профиля для выбранного метеопродукта на заданном диапазоне  высот
+
+### Получить [POST]
+
++ Request  (application/json)
+
+        {
+            "radar_id": 1,
+            "timestamp": 1513157817,
+            "marker_pos": {
+                "lat": 55.807775,
+                "lon": 37.566814
+            },
+            "max_altitude": 5000.2,
+            "rlp_type": 2
+        }
+
++ Response 200
 
 ## Новые продукты [/new_products]
 
