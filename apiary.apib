@@ -2461,7 +2461,47 @@ API для получения радиолокационных данных. В�
             "rlp_type": 2
         }
 
-+ Response 200
++ Response 200 
+
+## Параметры МРЛС [/parameters/{id}]
+
++ Parameters
+    + id (number) - ID радара
+
+### Получить [GET]
+
++ Response 200 (application/json)
+
+        {
+                "package_number": 11,
+                "work_mode": "Работает",
+                "scope": 0,
+                "rng_counts" : 111,
+                "rng_count": 23.11
+                "prd": "string",
+                "info_mrls": "string",
+                "common_state_mrls": "string",
+                "antenna_state": "string",
+                "ppm_state": "string",
+                "antenna_az": "string",
+                "antenna_um": "string",
+                "ppm_module_dsp": "string",
+                "ppm_reg_sharu": "string",
+                "ppm_prm": "string",
+                "channel_control": "string",
+                "control": "string",
+                "tumbler_az": "string",
+                "tumbler_um": "string",
+                "azimuth": 90.1,
+                "angle_v": 22.2,
+                "set_av": 2,
+                "av_change": 34.1,
+                "right_ah": 33.3,
+                "left_ah": 33.2,
+                "omega_ah": 34.55,
+                "num_angles_v": 2,
+                "num_ah_blank_tr": 3
+        }
 
 ## Новые продукты [/new_products]
 
