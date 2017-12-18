@@ -24,14 +24,8 @@ API для получения радиолокационных данных. В�
                     "id": 1,
                     "index": "0001",
                     "title": "Орловка",
-                    "latitude": {
-                        "type": "S",
-                        "value": "43° 13' 46''"
-                    },
-                    "longitude": {
-                        "type": "W",
-                        "value": "12° 43' 17''"
-                    },
+                    "lat": 55.807775,
+                    "lon": 37.566814,
                     "MASL": 0,
                     "HAAT_radar": 0,
                     "HAAT_AMS_DAD": 0,
@@ -51,14 +45,8 @@ API для получения радиолокационных данных. В�
                     "id": 2,
                     "index": "0002",
                     "title": "Чкаловский",
-                    "latitude": {
-                        "type": "S",
-                        "value": "43° 13' 46''"
-                    },
-                    "longitude": {
-                        "type": "W",
-                        "value": "12° 43' 17''"
-                    },
+                    "lat": 55.807775,
+                    "lon": 37.566814,
                     "MASL": 0,
                     "HAAT_radar": 0,
                     "HAAT_AMS_DAD": 0,
@@ -78,14 +66,8 @@ API для получения радиолокационных данных. В�
                     "id": 3,
                     "index": "0003",
                     "title": "Елец",
-                    "latitude": {
-                        "type": "S",
-                        "value": "43° 13' 46''"
-                    },
-                    "longitude": {
-                        "type": "W",
-                        "value": "12° 43' 17''"
-                    },
+                    "lat": 55.807775,
+                    "lon": 37.566814,
                     "MASL": 0,
                     "HAAT_radar": 0,
                     "HAAT_AMS_DAD": 0,
@@ -105,14 +87,8 @@ API для получения радиолокационных данных. В�
                     "id": 4,
                     "index": "0004",
                     "title": "Тула",
-                    "latitude": {
-                        "type": "S",
-                        "value": "43° 15' 46''"
-                    },
-                    "longitude": {
-                        "type": "W",
-                        "value": "12° 41' 17''"
-                    },
+                    "lat": 55.807775,
+                    "lon": 37.566814,
                     "MASL": 0,
                     "HAAT_radar": 1,
                     "HAAT_AMS_DAD": 0,
@@ -132,14 +108,8 @@ API для получения радиолокационных данных. В�
                     "id": 5,
                     "index": "0005",
                     "title": "Щелково",
-                    "latitude": {
-                        "type": "S",
-                        "value": "43° 15' 46''"
-                    },
-                    "longitude": {
-                        "type": "W",
-                        "value": "12° 41' 17''"
-                    },
+                    "lat": 55.807775,
+                    "lon": 37.566814,
                     "MASL": 0,
                     "HAAT_radar": 1,
                     "HAAT_AMS_DAD": 0,
@@ -171,14 +141,8 @@ API для получения радиолокационных данных. В�
                 "id": 3,
                 "index": "0003",
                 "title": "Елец",
-                "latitude": {
-                    "type": "S",
-                    "value": "43° 13' 46''"
-                },
-                "longitude": {
-                    "type": "W",
-                    "value": "12° 43' 17''"
-                },
+                "lat": 55.807775,
+                "lon": 37.566814,
                 "MASL": 0,
                 "HAAT_radar": 0,
                 "HAAT_AMS_DAD": 0,
@@ -205,14 +169,8 @@ API для получения радиолокационных данных. В�
             "id": 3,
             "index": "0003",
             "title": "Елец",
-            "latitude": {
-                "type": "S",
-                "value": "43° 13' 46''"
-            },
-            "longitude": {
-                "type": "W",
-                "value": "12° 43' 17''"
-            },
+            "lat": 55.807775,
+            "lon": 37.566814,
             "MASL": 0,
             "HAAT_radar": 0,
             "HAAT_AMS_DAD": 0,
@@ -238,21 +196,15 @@ API для получения радиолокационных данных. В�
             }
             
 + Response 200 (application/json)
-    
+
     + Body
         
             {
                 "id": 3
                 "index": "0003",
                 "title": "Елец",
-                "latitude": {
-                    "type": "S",
-                    "value": "43° 13' 46''"
-                },
-                "longitude": {
-                    "type": "W",
-                    "value": "12° 43' 17''"
-                },
+                "lat": 55.807775,
+                "lon": 37.566814,
                 "MASL": 0,
                 "HAAT_radar": 0,
                 "HAAT_AMS_DAD": 0,
@@ -279,14 +231,8 @@ API для получения радиолокационных данных. В�
             "id": 3,
             "index": "0003",
             "title": "Елец",
-            "latitude": {
-                "type": "S",
-                "value": "43° 13' 46''"
-            },
-            "longitude": {
-                "type": "W",
-                "value": "12° 43' 17''"
-            },
+            "lat": 55.807775,
+            "lon": 37.566814,
             "MASL": 0,
             "HAAT_radar": 0,
             "HAAT_AMS_DAD": 0,
@@ -722,7 +668,7 @@ API для получения радиолокационных данных. В�
                     ]
             }
 + Response 409
-            
+
 ### Обновить расписание станции [PUT]
 
 + Request (application/json)
@@ -1606,11 +1552,11 @@ API для получения радиолокационных данных. В�
     
 + Response 404
 
-### Обновить программу [/program{?ignore_conflict}]
+## Обновить программу [/program{?ignore_conflict}]
 
 + Parameters
     * ignore_conflict - указываем этот параметр при редактировании, когда хотим сохранить измененеия несмотря на то, что программа используется в расписании.
-    
+
 ### Обновить программу [PUT]
 
 + Request (application/json)
@@ -1764,7 +1710,7 @@ API для получения радиолокационных данных. В�
 ### Получить список настроек экспорта bufr [GET]
 
 + Response 200 (application/json)
-        
+
         {
             "count": 2,
             "items": 
@@ -1803,11 +1749,11 @@ API для получения радиолокационных данных. В�
                     }
                 ]
         }
- 
+
 ## Обновить список настроек экспорта BUFR [PUT]
 
 + Request (application/json)
-    
+
         [
             {
                 "active": true,
@@ -1842,9 +1788,9 @@ API для получения радиолокационных данных. В�
                 ]
             }
         ]
-        
+
 + Response 200 (application/json)
-        
+
         {
             "count": 2,
             "items": 
@@ -1883,7 +1829,6 @@ API для получения радиолокационных данных. В�
                     }
                 ]
         }
-
     
 + Response 422 (application/json)
 
@@ -1909,7 +1854,7 @@ API для получения радиолокационных данных. В�
 ### Получить настройки для построения карт [GET]
 
 + Response 200 (application/json)
-    
+
         {
             "vector_velocity_field": {
                 "circular_horizontal_pitch": 100,
@@ -1945,50 +1890,11 @@ API для получения радиолокационных данных. В�
                 "cell_size": 100
             }
         }
-                    
- 
+
 ### Обновить настройки для построения карт [PUT]
 
 + Request (application/json)
-    
-        {
-            "vector_velocity_field": {
-                "circular_horizontal_pitch": 100,
-                "circular_vertical_pitch": 100,
-                "sector_horizontal_pitch": 100,
-                "sector_vertical_pitch": 100
-            },
-            "wind_shear_field": {
-                "circular_max_height": 100,
-                "circular_max_distance": 100,
-                "sector_max_height": 100,
-                "sector_max_distance": 100,
-                "horizontal_pitch": 100,
-                "vertical_pitch": 100
-            },
-            "atmospheric_process": {
-                "cell_size": 150,
-                "line_generalization": 3,
-                "line_expansion": 3,
-            },
-            "vector": {
-                "size": 5,
-                "thickness": 3
-            },
-            "vertical_section": {
-                "horizontal_pitch": 100,
-                "vertical_pitch": 100
-            },
-            "accumulated_precipitation": {
-                "cell_size": 100
-            },
-            "vertically_integrated_liquid": {
-                "cell_size": 100
-            }
-        }
-        
-+ Response 200 (application/json)
-        
+
         {
             "vector_velocity_field": {
                 "circular_horizontal_pitch": 100,
@@ -2025,7 +1931,44 @@ API для получения радиолокационных данных. В�
             }
         }
 
-    
++ Response 200 (application/json)
+
+        {
+            "vector_velocity_field": {
+                "circular_horizontal_pitch": 100,
+                "circular_vertical_pitch": 100,
+                "sector_horizontal_pitch": 100,
+                "sector_vertical_pitch": 100
+            },
+            "wind_shear_field": {
+                "circular_max_height": 100,
+                "circular_max_distance": 100,
+                "sector_max_height": 100,
+                "sector_max_distance": 100,
+                "horizontal_pitch": 100,
+                "vertical_pitch": 100
+            },
+            "atmospheric_process": {
+                "cell_size": 150,
+                "line_generalization": 3,
+                "line_expansion": 3,
+            },
+            "vector": {
+                "size": 5,
+                "thickness": 3
+            },
+            "vertical_section": {
+                "horizontal_pitch": 100,
+                "vertical_pitch": 100
+            },
+            "accumulated_precipitation": {
+                "cell_size": 100
+            },
+            "vertically_integrated_liquid": {
+                "cell_size": 100
+            }
+        }
+
 + Response 422 (application/json)
 
         {
@@ -2048,7 +1991,7 @@ API для получения радиолокационных данных. В�
 ### Получить список настроек цветовой шкалы [GET]
 
 + Response 200 (application/json)
-        
+
         {
             "count": 2,
             "items":
@@ -2099,7 +2042,7 @@ API для получения радиолокационных данных. В�
                     }
                 ]        
         }
-        
+
 ## Настройки цветовой шкалы [/settings/color_scale/{id}]
 
 + Parameters
@@ -2172,7 +2115,7 @@ API для получения радиолокационных данных. В�
 ### Получить настройки цветовой шкалы по умолчанию [GET]
 
 + Response 200 (application/json)
-        
+
         {
             "count": 3,
             "items":
