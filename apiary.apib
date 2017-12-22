@@ -916,14 +916,14 @@ API для получения радиолокационных данных. В�
             "timestamp": 1513157816
         }
 
-## РЛП [/radar/{id}/RLP/{type}/{?rlp_ids}{?view_type}{?only_dangerous}{?altitude}{?from}{?to}{?pixel_size}{?radius}]
+## РЛП [/radar/{id}/RLP/{type}/{?rlp_id}{?view_type}{?only_dangerous}{?altitude}{?from}{?to}{?pixel_size}{?radius}]
 
 ### Получить РЛП [GET]
 
 + Parameters
     + id (number) - ID станции
     + type (str) - тип данных, для данной итерации всегда png
-    * rlp_ids - Фильтр по id радиолокациооных продуктов
+    * rlp_id - id радиолокационного продукта
     * view_type - Карта метеоявлений в ячейках или в контурах
     * only_dangerous - отображать только ОМЯ
     * altitude - Высота в метрах
@@ -935,7 +935,29 @@ API для получения радиолокационных данных. В�
 
 + Response 200 (application/json)
 
+        [
         {
+            "timestamp": 74652387,
+            "type": "png",
+            "params": {
+                "radius": 100,
+                "pixel_size": 1000,
+                "image_size": 200
+            },
+            "url": "image url here"
+        },
+        {
+            "timestamp": 74652387,
+            "type": "png",
+            "params": {
+                "radius": 100,
+                "pixel_size": 1000,
+                "image_size": 200
+            },
+            "url": "image url here"
+        },
+        {
+            "timestamp": 74652387,
             "type": "png",
             "params": {
                 "radius": 100,
@@ -944,6 +966,7 @@ API для получения радиолокационных данных. В�
             },
             "url": "image url here"
         }
+        ]
         
 ## КС [/radar/{id}/CS{?cs_ids}{?type}{?altitude}{?from}{?to}{?pixel_size}{?radius}г]
 
